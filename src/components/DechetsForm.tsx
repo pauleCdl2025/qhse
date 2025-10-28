@@ -18,6 +18,8 @@ export default function DechetsForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
+    qhseStorage.saveDechet(formData);
     alert('Enregistrement effectué avec succès!');
     navigate('/dechets');
   };

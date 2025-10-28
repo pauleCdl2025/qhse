@@ -12,6 +12,16 @@ import MaintenanceForm from './components/MaintenanceForm';
 import AuditsForm from './components/AuditsForm';
 import FormationsForm from './components/FormationsForm';
 import DechetsForm from './components/DechetsForm';
+import RisquesForm from './components/RisquesForm';
+import GedForm from './components/GedForm';
+import Reporting from './components/Reporting';
+import IncidentsList from './components/IncidentsList';
+import MaintenanceList from './components/MaintenanceList';
+import AuditsList from './components/AuditsList';
+import FormationsList from './components/FormationsList';
+import DechetsList from './components/DechetsList';
+import RisquesList from './components/RisquesList';
+import GedList from './components/GedList';
 import './App.css';
 
 function App() {
@@ -65,11 +75,22 @@ function App() {
             <Route path="/anatomical/new" element={<AnatomicalPiecesForm />} />
             <Route path="/anatomical/:ref" element={<AnatomicalPieceDetail />} />
             <Route path="/anatomical/:ref/edit" element={<AnatomicalPiecesForm />} />
+            {/* QHSE Routes */}
+            <Route path="/incidents" element={<IncidentsList />} />
             <Route path="/incidents/new" element={<IncidentsForm />} />
+            <Route path="/maintenance" element={<MaintenanceList />} />
             <Route path="/maintenance/new" element={<MaintenanceForm />} />
+            <Route path="/audits" element={<AuditsList />} />
             <Route path="/audits/new" element={<AuditsForm />} />
+            <Route path="/formations" element={<FormationsList />} />
             <Route path="/formations/new" element={<FormationsForm />} />
+            <Route path="/dechets" element={<DechetsList />} />
             <Route path="/dechets/new" element={<DechetsForm />} />
+            <Route path="/risques" element={<RisquesList />} />
+            <Route path="/risques/new" element={<RisquesForm />} />
+            <Route path="/ged" element={<GedList />} />
+            <Route path="/ged/new" element={<GedForm />} />
+            <Route path="/reporting" element={<Reporting />} />
           </Routes>
         </div>
       </div>

@@ -18,6 +18,8 @@ export default function MaintenanceForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
+    qhseStorage.saveMaintenance(formData);
     alert('Enregistrement effectué avec succès!');
     navigate('/maintenance');
   };

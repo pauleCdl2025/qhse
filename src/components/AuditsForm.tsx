@@ -19,6 +19,8 @@ export default function AuditsForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
+    qhseStorage.saveAudit(formData);
     alert('Enregistrement effectué avec succès!');
     navigate('/audits');
   };

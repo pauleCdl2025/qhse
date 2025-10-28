@@ -21,7 +21,8 @@ export default function IncidentsForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Save to storage
+    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
+    qhseStorage.saveIncident(formData);
     alert('Enregistrement effectué avec succès!');
     navigate('/incidents');
   };

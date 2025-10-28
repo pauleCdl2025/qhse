@@ -20,6 +20,8 @@ export default function FormationsForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
+    qhseStorage.saveFormation(formData);
     alert('Enregistrement effectué avec succès!');
     navigate('/formations');
   };
