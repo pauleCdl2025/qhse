@@ -610,3 +610,50 @@ th[style*="cursor: pointer"]:hover {
   }
 }
 
+/* QHSE Dashboard Cards */
+.module-card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.module-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.module-icon {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.module-card:hover .module-icon {
+  transform: scale(1.1) rotate(5deg);
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+}
+
+.badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.02);
+  border-radius: 8px;
+}
+
+.badge-container .badge {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+}
+
+.badge .btn-close {
+  font-size: 0.7rem;
+  margin-left: 0.25rem;
+}
+
