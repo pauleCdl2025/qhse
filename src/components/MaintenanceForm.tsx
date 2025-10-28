@@ -33,7 +33,7 @@ export default function MaintenanceForm() {
           </div>
           <div className="col-md-3">
             <label className="form-label">Type *</label>
-            <select className="form-select" value={formData.type} onChange={(e) => setFormData(prev => ({...prev, type: e.target.value}))}>
+            <select className="form-select" value={formData.type} onChange={(e) => setFormData(prev => ({...prev, type: e.target.value as 'Préventive' | 'Corrective' | 'Calibration'}))}>
               <option value="Préventive">Préventive</option>
               <option value="Corrective">Corrective</option>
               <option value="Calibration">Calibration</option>
@@ -41,7 +41,7 @@ export default function MaintenanceForm() {
           </div>
           <div className="col-md-3">
             <label className="form-label">Statut</label>
-            <select className="form-select" value={formData.statut} onChange={(e) => setFormData(prev => ({...prev, statut: e.target.value}))}>
+            <select className="form-select" value={formData.statut} onChange={(e) => setFormData(prev => ({...prev, statut: e.target.value as 'Planifié' | 'En cours' | 'Terminé' | 'En retard'}))}>
               <option value="Planifié">Planifié</option>
               <option value="En cours">En cours</option>
               <option value="Terminé">Terminé</option>

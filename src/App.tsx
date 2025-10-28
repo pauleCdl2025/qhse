@@ -5,7 +5,7 @@ import AnatomicalPiecesForm from './components/AnatomicalPiecesForm';
 import AnatomicalPiecesList from './components/AnatomicalPiecesList';
 import AnatomicalPieceDetail from './components/AnatomicalPieceDetail';
 import Logo from './components/Logo';
-import Dashboard from './components/Dashboard';
+// import Dashboard from './components/Dashboard';
 import QHSEDashboard from './components/QHSEDashboard';
 import IncidentsForm from './components/IncidentsForm';
 import MaintenanceForm from './components/MaintenanceForm';

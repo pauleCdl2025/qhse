@@ -34,7 +34,7 @@ export default function AuditsForm() {
           </div>
           <div className="col-md-4">
             <label className="form-label">Type *</label>
-            <select className="form-select" value={formData.type} onChange={(e) => setFormData(prev => ({...prev, type: e.target.value}))}>
+            <select className="form-select" value={formData.type} onChange={(e) => setFormData(prev => ({...prev, type: e.target.value as 'Interne' | 'Externe' | 'Fournisseur'}))}>
               <option value="Interne">Interne</option>
               <option value="Externe">Externe</option>
               <option value="Fournisseur">Fournisseur</option>
