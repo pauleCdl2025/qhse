@@ -106,3 +106,24 @@ Les styles peuvent être modifiés dans :
 
 Ce projet est destiné à un usage interne dans un établissement de santé.
 
+## Déploiement Netlify
+
+1. Créez un site Netlify et connectez le repo.
+2. Build command: `npm run build`  — Publish directory: `dist`
+3. Variables d’environnement (tableau Settings > Environment):
+   - `VITE_SUPABASE_URL` = `https://uehamaitijekflxpeuxj.supabase.co`
+   - `VITE_SUPABASE_ANON_KEY` = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlaGFtYWl0aWpla2ZseHBldXhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2NDQ2OTYsImV4cCI6MjA3NzIyMDY5Nn0.fDxXA9GiDrJZTPQdzsFhk6uoS7PgYzpC5wbLBdZn3Ck`
+
+> Les variables doivent commencer par `VITE_` pour être exposées au client.
+
+## Dev local
+
+Créez un fichier `.env.local` à la racine:
+
+```
+VITE_SUPABASE_URL=https://uehamaitijekflxpeuxj.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlaGFtYWl0aWpla2ZseHBldXhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2NDQ2OTYsImV4cCI6MjA3NzIyMDY5Nn0.fDxXA9GiDrJZTPQdzsFhk6uoS7PgYzpC5wbLBdZn3Ck
+```
+
+Redémarrez `npm run dev` après modification des variables.
+
