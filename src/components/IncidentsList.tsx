@@ -5,10 +5,20 @@ import { qhseStorage } from '../utils/storageQHSE';
 
 export default function IncidentsList() {
   const [records, setRecords] = useState<Incident[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterStatut, setFilterStatut] = useState('');
 
   useEffect(() => {
     setRecords(qhseStorage.getAllIncidents());
   }, []);
+
+  const filteredRecords = records.filter(r => {
+    const matchesSearch = r.numero.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         r.lieu.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         r.type.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = !filterStatut || r.statut === filterStatut;
+    return matchesSearch && matchesFilter;
+  });
 
   const formatDateTime = (dt?: string) => {
     if (!dt) return '';
@@ -20,6 +30,26 @@ export default function IncidentsList() {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>Gestion des Incidents / Accidents / AES</h2>
         <Link to="/incidents/new" className="btn btn-primary btn-sm">Nouvelle déclaration</Link>
+      </div>
+
+      <div className="row mb-3">
+        <div className="col-md-8">
+          <input 
+            type="text" 
+            className="form-control" 
+            placeholder="Rechercher par N°, lieu, type..." 
+            value={searchTerm} 
+            onChange={(e) => setSearchTerm(e.target.value)} 
+          />
+        </div>
+        <div className="col-md-4">
+          <select className="form-select" value={filterStatut} onChange={(e) => setFilterStatut(e.target.value)}>
+            <option value="">Tous les statuts</option>
+            <option value="En cours">En cours</option>
+            <option value="Résolu">Résolu</option>
+            <option value="Archivé">Archivé</option>
+          </select>
+        </div>
       </div>
 
       <div className="table-responsive">
@@ -37,12 +67,12 @@ export default function IncidentsList() {
             </tr>
           </thead>
           <tbody>
-            {records.length === 0 ? (
+            {filteredRecords.length === 0 ? (
               <tr>
                 <td colSpan={8} className="text-center">Aucun enregistrement</td>
               </tr>
             ) : (
-              records.map((r) => (
+              filteredRecords.map((r) => (
                 <tr key={r.id}>
                   <td>{r.numero}</td>
                   <td>{formatDateTime(r.date_incident)}</td>

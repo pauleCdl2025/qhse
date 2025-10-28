@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Incident } from '../types/qhse';
+import Toast from './Toast';
 
 export default function IncidentsForm() {
   const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
   const [formData, setFormData] = useState<Incident>({
     numero: '',
     date_incident: '',
@@ -23,8 +26,9 @@ export default function IncidentsForm() {
     e.preventDefault();
     const qhseStorage = require('../utils/storageQHSE').qhseStorage;
     qhseStorage.saveIncident(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/incidents');
+    setToastMessage('✅ Enregistrement effectué avec succès!');
+    setShowToast(true);
+    setTimeout(() => navigate('/incidents'), 1500);
   };
 
   const handleChange = (field: keyof Incident, value: string) => {
@@ -104,6 +108,8 @@ export default function IncidentsForm() {
           </div>
         </div>
       </form>
+      
+      <Toast show={showToast} message={toastMessage} type="success" onClose={() => setShowToast(false)} />
     </div>
   );
 }

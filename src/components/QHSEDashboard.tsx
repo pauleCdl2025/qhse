@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import { qhseStorage } from '../utils/storageQHSE';
 
 export default function QHSEDashboard() {
+  const stats = qhseStorage.getStats();
   const modules = [
     {
       id: 'sterilization',
@@ -84,11 +86,52 @@ export default function QHSEDashboard() {
     }
   ];
 
+  const totalRecords = Object.values(stats).reduce((sum, val) => sum + val, 0);
+
   return (
     <div className="container my-5">
       <div className="text-center mb-5">
         <h1 className="display-4 custom-title">Tableau de Bord QHSE</h1>
         <p className="lead text-muted">Gestion complète de la Qualité, Hygiène, Sécurité et Environnement</p>
+        <div className="alert alert-info d-inline-block">
+          <strong>📊 Total d'enregistrements : {totalRecords}</strong>
+        </div>
+      </div>
+
+      {/* Statistiques Globales */}
+      <div className="row mb-4">
+        <div className="col-md-3 col-sm-6 mb-3">
+          <div className="card card-stat" style={{borderTop: '4px solid #E74C3C'}}>
+            <div className="card-body text-center">
+              <div className="display-4">{stats.incidents}</div>
+              <div className="text-muted">Incidents</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 col-sm-6 mb-3">
+          <div className="card card-stat" style={{borderTop: '4px solid #F39C12'}}>
+            <div className="card-body text-center">
+              <div className="display-4">{stats.maintenance}</div>
+              <div className="text-muted">Maintenances</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 col-sm-6 mb-3">
+          <div className="card card-stat" style={{borderTop: '4px solid #27AE60'}}>
+            <div className="card-body text-center">
+              <div className="display-4">{stats.audits}</div>
+              <div className="text-muted">Audits</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 col-sm-6 mb-3">
+          <div className="card card-stat" style={{borderTop: '4px solid #3498DB'}}>
+            <div className="card-body text-center">
+              <div className="display-4">{stats.formations}</div>
+              <div className="text-muted">Formations</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="row g-4">
