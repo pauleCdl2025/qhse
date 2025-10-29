@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
 }
 
 /* Variables de couleurs Centre Diagnostic - Palette logo */
@@ -26,6 +28,27 @@ body {
 
 .main-content {
   min-height: calc(100vh - 80px);
+  padding: 2rem 0;
+  background: transparent;
+}
+
+.container {
+  max-width: 1400px;
+}
+
+/* Background moderne avec pattern subtil */
+.main-content::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(78, 205, 196, 0.03) 1px, transparent 0);
+  background-size: 40px 40px;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Navbar grise professionnelle */
@@ -122,15 +145,75 @@ body {
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
-/* Tables */
+/* Tables professionnelles */
 .table {
   font-size: 0.92rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.table thead {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table thead th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  color: #495057;
+  padding: 1rem;
+  border: none;
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.table tbody tr:hover {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.05) 0%, rgba(102, 184, 214, 0.05) 100%);
+  transform: scale(1.001);
+  box-shadow: 0 2px 8px rgba(78, 205, 196, 0.1);
+}
+
+.table tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  border: none;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
 }
 
 .form-label {
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-  color: var(--color-gray-700);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  letter-spacing: -0.2px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-label::before {
+  content: '→';
+  color: var(--color-turquoise);
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.form-group:hover .form-label::before,
+.form-control:focus + .form-label::before {
+  opacity: 1;
 }
 
 .btn-sm {
@@ -143,6 +226,13 @@ body {
   background: var(--gradient-primary);
   border: none;
   box-shadow: 0 6px 16px rgba(102, 184, 214, 0.35);
+  border-radius: 10px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-primary::before {
@@ -165,7 +255,28 @@ body {
 
 .btn-primary:hover {
   background: linear-gradient(135deg, var(--color-blue-light) 0%, var(--color-turquoise) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(102, 184, 214, 0.45);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 184, 214, 0.3);
+}
+
+.btn-secondary {
+  border-radius: 10px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: 2px solid #6c757d;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #6c757d;
+  border-color: #6c757d;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
 }
 
 .btn-outline-primary {
@@ -180,14 +291,16 @@ body {
   color: #fff;
 }
 
-/* Cards sobres */
+/* Cards professionnelles */
 .card {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid var(--color-gray-300);
-  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: white;
+  margin-bottom: 1.5rem;
 }
 
 .card::before {
@@ -208,9 +321,10 @@ body {
 }
 
 .card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 12px 32px rgba(78, 205, 196, 0.2);
   border-color: var(--color-turquoise);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
 }
 
 .card-title {
@@ -228,11 +342,45 @@ a:hover {
   color: var(--color-turquoise);
 }
 
-/* Formulaires */
+/* Formulaires améliorés */
+.form-control,
+.form-select {
+  border-radius: 10px;
+  border: 2px solid #e9ecef;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+}
+
+.form-control:hover,
+.form-select:hover {
+  border-color: #ced4da;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
 .form-control:focus,
 .form-select:focus {
   border-color: var(--color-turquoise);
-  box-shadow: 0 0 0 0.25rem rgba(78, 205, 196, 0.25);
+  box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.15), 0 4px 12px rgba(78, 205, 196, 0.2);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.form-control:not(:placeholder-shown),
+.form-select:not([value=""]) {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Floating label effect */
+.form-floating > label {
+  color: #6c757d;
+  font-weight: 500;
 }
 
 /* Textes et titres */
@@ -241,9 +389,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-  border-bottom: 2px solid var(--color-turquoise);
-  padding-bottom: 8px;
-  margin-bottom: 24px;
+  border-bottom: 3px solid var(--color-turquoise);
+  padding-bottom: 12px;
+  margin-bottom: 2rem;
+  position: relative;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: -0.5px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--color-blue-light);
+  border-radius: 2px;
+}
+
+h1, h3, h4, h5, h6 {
+  color: #2c3e50;
+  font-weight: 700;
+  letter-spacing: -0.3px;
 }
 
 .custom-title {
@@ -269,13 +438,40 @@ h2 {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid #e9ecef;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-stat:hover::before {
+  opacity: 1;
 }
 
 .card-stat:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(78, 205, 196, 0.25);
-  border-top: 4px solid var(--color-turquoise);
+  box-shadow: 0 16px 40px rgba(78, 205, 196, 0.25);
   background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+}
+
+.card-stat .display-4 {
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
 }
 
 .stat-icon {
@@ -514,10 +710,24 @@ th[style*="cursor: pointer"]:hover {
 /* Alertes améliorées */
 .alert {
   border: none;
-  border-radius: 12px;
-  padding: 16px 20px;
-  box-shadow: var(--shadow-sm);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   border-left: 4px solid;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.alert::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: inherit;
+  opacity: 0.1;
 }
 
 .alert-success {
@@ -612,14 +822,39 @@ th[style*="cursor: pointer"]:hover {
 
 /* QHSE Dashboard Cards */
 .module-card {
-  transition: all 0.3s ease;
-  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
   overflow: hidden;
+  background: white;
+  border: 1px solid #e9ecef;
+  position: relative;
+}
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: inherit;
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.module-card:hover::before {
+  transform: scaleX(1);
 }
 
 .module-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+  border-color: transparent;
+}
+
+.module-card .btn-primary {
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .module-icon {
