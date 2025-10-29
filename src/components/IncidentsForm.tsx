@@ -58,7 +58,17 @@ export default function IncidentsForm() {
           </div>
           <div className="col-md-4">
             <label className="form-label">Classification</label>
-            <input type="text" className="form-control" value={formData.classification} onChange={(e) => handleChange('classification', e.target.value)} />
+            <select className="form-select" value={formData.classification} onChange={(e) => handleChange('classification', e.target.value)}>
+              <option value="">Sélectionner...</option>
+              <option value="Incident bénin">Incident bénin</option>
+              <option value="Incident grave">Incident grave</option>
+              <option value="Accident du travail">Accident du travail</option>
+              <option value="Accident de trajet">Accident de trajet</option>
+              <option value="AES niveau 1">AES niveau 1</option>
+              <option value="AES niveau 2">AES niveau 2</option>
+              <option value="AES niveau 3">AES niveau 3</option>
+              <option value="Presque accident">Presque accident</option>
+            </select>
           </div>
           <div className="col-md-4">
             <label className="form-label">Gravité</label>
@@ -80,7 +90,20 @@ export default function IncidentsForm() {
           </div>
           <div className="col-md-6">
             <label className="form-label">Lieu *</label>
-            <input type="text" className="form-control" value={formData.lieu} onChange={(e) => handleChange('lieu', e.target.value)} required />
+            <select className="form-select" value={formData.lieu} onChange={(e) => handleChange('lieu', e.target.value)} required>
+              <option value="">Sélectionner...</option>
+              <option value="Bloc opératoire">Bloc opératoire</option>
+              <option value="Service de chirurgie">Service de chirurgie</option>
+              <option value="Urgences">Urgences</option>
+              <option value="Médecine">Médecine</option>
+              <option value="Réanimation">Réanimation</option>
+              <option value="Radiologie">Radiologie</option>
+              <option value="Laboratoire">Laboratoire</option>
+              <option value="Blanchisserie">Blanchisserie</option>
+              <option value="Stérilisation">Stérilisation</option>
+              <option value="Pharmacie">Pharmacie</option>
+              <option value="Autre">Autre</option>
+            </select>
           </div>
           <div className="col-md-6">
             <label className="form-label">Responsable du suivi *</label>

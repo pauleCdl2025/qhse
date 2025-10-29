@@ -31,7 +31,20 @@ export default function MaintenanceForm() {
         <div className="row g-3">
           <div className="col-md-6">
             <label className="form-label">Équipement *</label>
-            <input type="text" className="form-control" value={formData.equipement} onChange={(e) => setFormData(prev => ({...prev, equipement: e.target.value}))} required />
+            <select className="form-select" value={formData.equipement} onChange={(e) => setFormData(prev => ({...prev, equipement: e.target.value}))} required>
+              <option value="">Sélectionner...</option>
+              <option value="Autoclave">Autoclave</option>
+              <option value="Stérilisateur vapeur">Stérilisateur vapeur</option>
+              <option value="Laveur-désinfecteur">Laveur-désinfecteur</option>
+              <option value="Moniteur patient">Moniteur patient</option>
+              <option value="Respirateur">Respirateur</option>
+              <option value="Défibrillateur">Défibrillateur</option>
+              <option value="Scope">Scope</option>
+              <option value="Pompe à perfusion">Pompe à perfusion</option>
+              <option value="Ventilateur">Ventilateur</option>
+              <option value="Table d'opération">Table d'opération</option>
+              <option value="Autre">Autre</option>
+            </select>
           </div>
           <div className="col-md-3">
             <label className="form-label">Type *</label>

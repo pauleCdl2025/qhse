@@ -48,7 +48,21 @@ export default function AuditsForm() {
           </div>
           <div className="col-md-6">
             <label className="form-label">Audité (service/département) *</label>
-            <input type="text" className="form-control" value={formData.audite} onChange={(e) => setFormData(prev => ({...prev, audite: e.target.value}))} required />
+            <select className="form-select" value={formData.audite} onChange={(e) => setFormData(prev => ({...prev, audite: e.target.value}))} required>
+              <option value="">Sélectionner...</option>
+              <option value="Bloc opératoire">Bloc opératoire</option>
+              <option value="Service de chirurgie">Service de chirurgie</option>
+              <option value="Urgences">Urgences</option>
+              <option value="Médecine">Médecine</option>
+              <option value="Réanimation">Réanimation</option>
+              <option value="Radiologie">Radiologie</option>
+              <option value="Laboratoire">Laboratoire</option>
+              <option value="Blanchisserie">Blanchisserie</option>
+              <option value="Stérilisation">Stérilisation</option>
+              <option value="Pharmacie">Pharmacie</option>
+              <option value="Direction">Direction</option>
+              <option value="Autre">Autre</option>
+            </select>
           </div>
           <div className="col-md-6">
             <label className="form-label">Auditeur *</label>
@@ -56,7 +70,17 @@ export default function AuditsForm() {
           </div>
           <div className="col-md-6">
             <label className="form-label">Secteur audité *</label>
-            <input type="text" className="form-control" value={formData.secteur} onChange={(e) => setFormData(prev => ({...prev, secteur: e.target.value}))} required />
+            <select className="form-select" value={formData.secteur} onChange={(e) => setFormData(prev => ({...prev, secteur: e.target.value}))} required>
+              <option value="">Sélectionner...</option>
+              <option value="Qualité">Qualité</option>
+              <option value="Hygiène">Hygiène</option>
+              <option value="Sécurité">Sécurité</option>
+              <option value="Environnement">Environnement</option>
+              <option value="QHSE global">QHSE global</option>
+              <option value="Procédures">Procédures</option>
+              <option value="Tracabilité">Traçabilité</option>
+              <option value="Autre">Autre</option>
+            </select>
           </div>
           <div className="col-md-3">
             <label className="form-label">Conformités</label>

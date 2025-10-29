@@ -58,7 +58,14 @@ export default function DechetsForm() {
           </div>
           <div className="col-md-4">
             <label className="form-label">Filière d'élimination *</label>
-            <input type="text" className="form-control" value={formData.filiere} onChange={(e) => setFormData(prev => ({...prev, filiere: e.target.value}))} required />
+            <select className="form-select" value={formData.filiere} onChange={(e) => setFormData(prev => ({...prev, filiere: e.target.value}))} required>
+              <option value="">Sélectionner...</option>
+              <option value="Incinération">Incinération</option>
+              <option value="Bêchage">Bêchage</option>
+              <option value="Tri-sélectif">Tri-sélectif</option>
+              <option value="Valorisation énergétique">Valorisation énergétique</option>
+              <option value="Enfouissement">Enfouissement</option>
+            </select>
           </div>
           <div className="col-md-6">
             <label className="form-label">Transporteur *</label>

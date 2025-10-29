@@ -61,25 +61,36 @@ export default function LingeForm() {
         <div className="row g-3">
           <div className="col-md-2">
             <label className="form-label">Centre *</label>
-            <input 
-              type="text" 
-              className="form-control" 
+            <select 
+              className="form-select" 
               value={formData.centre} 
-              onChange={(e) => setFormData(prev => ({...prev, centre: e.target.value.toUpperCase()}))} 
-              maxLength={2}
-              required 
-            />
+              onChange={(e) => setFormData(prev => ({...prev, centre: e.target.value}))} 
+              required
+            >
+              <option value="CD">Centre Diagnostic (CD)</option>
+              <option value="CH">Centre Hospitalier (CH)</option>
+              <option value="CL">Clinique (CL)</option>
+              <option value="HP">Hôpital (HP)</option>
+            </select>
           </div>
           <div className="col-md-2">
             <label className="form-label">Service *</label>
-            <input 
-              type="text" 
-              className="form-control" 
+            <select 
+              className="form-select" 
               value={formData.service} 
-              onChange={(e) => setFormData(prev => ({...prev, service: e.target.value.toUpperCase()}))} 
-              maxLength={2}
-              required 
-            />
+              onChange={(e) => setFormData(prev => ({...prev, service: e.target.value}))} 
+              required
+            >
+              <option value="">Sélectionner...</option>
+              <option value="BL">Bloc Opératoire (BL)</option>
+              <option value="LA">Blanchisserie (LA)</option>
+              <option value="UR">Urgences (UR)</option>
+              <option value="CH">Chirurgie (CH)</option>
+              <option value="ME">Médecine (ME)</option>
+              <option value="ST">Stérilisation (ST)</option>
+              <option value="RE">Réanimation (RE)</option>
+              <option value="RD">Radiologie (RD)</option>
+            </select>
           </div>
           <div className="col-md-2">
             <label className="form-label">Item *</label>
@@ -127,14 +138,24 @@ export default function LingeForm() {
 
           <div className="col-md-6">
             <label className="form-label">Type de linge *</label>
-            <input 
-              type="text" 
-              className="form-control" 
+            <select 
+              className="form-select" 
               value={formData.type_linge} 
               onChange={(e) => setFormData(prev => ({...prev, type_linge: e.target.value}))} 
-              placeholder="Ex: Draps de lit, Blouse OP..." 
-              required 
-            />
+              required
+            >
+              <option value="">Sélectionner...</option>
+              <option value="Draps de lit">Draps de lit</option>
+              <option value="Taies d'oreiller">Taies d'oreiller</option>
+              <option value="Blouses médicales">Blouses médicales</option>
+              <option value="Blouses opératoires">Blouses opératoires</option>
+              <option value="Champs opératoires">Champs opératoires</option>
+              <option value="Champs stériles">Champs stériles</option>
+              <option value="Scrubs">Scrubs</option>
+              <option value="Serviettes">Serviettes</option>
+              <option value="Nappes">Nappes</option>
+              <option value="Autre">Autre</option>
+            </select>
           </div>
           <div className="col-md-6">
             <label className="form-label">Responsable *</label>

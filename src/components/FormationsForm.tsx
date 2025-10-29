@@ -44,7 +44,17 @@ export default function FormationsForm() {
           </div>
           <div className="col-md-6">
             <label className="form-label">Type de formation *</label>
-            <input type="text" className="form-control" value={formData.type} onChange={(e) => setFormData(prev => ({...prev, type: e.target.value}))} required />
+            <select className="form-select" value={formData.type} onChange={(e) => setFormData(prev => ({...prev, type: e.target.value}))} required>
+              <option value="">Sélectionner...</option>
+              <option value="Formation continue">Formation continue</option>
+              <option value="Formation initiale">Formation initiale</option>
+              <option value="Habilitation">Habilitation</option>
+              <option value="Recyclage">Recyclage</option>
+              <option value="Formation sécurité">Formation sécurité</option>
+              <option value="Formation hygiène">Formation hygiène</option>
+              <option value="Formation QHSE">Formation QHSE</option>
+              <option value="Autre">Autre</option>
+            </select>
           </div>
           <div className="col-md-6">
             <label className="form-label">Formateur *</label>
