@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FaFilePdf, FaFileExcel, FaFileWord } from 'react-icons/fa';
 
 export default function Reporting() {
   const [reportType, setReportType] = useState('');
@@ -58,7 +59,9 @@ export default function Reporting() {
         <div className="col-md-4">
           <div className="card h-100">
             <div className="card-body text-center">
-              <div className="mb-3" style={{fontSize: '3rem'}}>📄</div>
+              <div className="mb-3 d-flex justify-content-center">
+                <FaFilePdf style={{fontSize: '3rem', color: '#E74C3C'}} />
+              </div>
               <h5 className="card-title">Export PDF</h5>
               <p className="card-text text-muted">Génère un rapport PDF professionnel avec graphiques et statistiques</p>
               <button className="btn btn-outline-danger" onClick={() => handleExport('pdf')}>Export PDF</button>
@@ -68,7 +71,9 @@ export default function Reporting() {
         <div className="col-md-4">
           <div className="card h-100">
             <div className="card-body text-center">
-              <div className="mb-3" style={{fontSize: '3rem'}}>📊</div>
+              <div className="mb-3 d-flex justify-content-center">
+                <FaFileExcel style={{fontSize: '3rem', color: '#27AE60'}} />
+              </div>
               <h5 className="card-title">Export Excel</h5>
               <p className="card-text text-muted">Tableaux Excel exploitables avec formules et graphiques</p>
               <button className="btn btn-outline-success" onClick={() => handleExport('excel')}>Export Excel</button>
@@ -78,7 +83,9 @@ export default function Reporting() {
         <div className="col-md-4">
           <div className="card h-100">
             <div className="card-body text-center">
-              <div className="mb-3" style={{fontSize: '3rem'}}>📝</div>
+              <div className="mb-3 d-flex justify-content-center">
+                <FaFileWord style={{fontSize: '3rem', color: '#3498DB'}} />
+              </div>
               <h5 className="card-title">Export Word</h5>
               <p className="card-text text-muted">Document Word formaté pour rapports officiels</p>
               <button className="btn btn-outline-primary" onClick={() => handleExport('word')}>Export Word</button>

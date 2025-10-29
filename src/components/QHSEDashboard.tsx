@@ -1,12 +1,25 @@
 import { Link } from 'react-router-dom';
 import { qhseStorage } from '../utils/storageQHSE';
+import { 
+  FaMicroscope, 
+  FaLungs, 
+  FaExclamationTriangle, 
+  FaWrench, 
+  FaClipboardCheck, 
+  FaGraduationCap, 
+  FaRecycle, 
+  FaShieldAlt, 
+  FaFolderOpen, 
+  FaShirtsinbulk,
+  FaChartBar 
+} from 'react-icons/fa';
 
 export default function QHSEDashboard() {
   const stats = qhseStorage.getStats();
   const modules = [
     {
       id: 'sterilization',
-      icon: '🔬',
+      Icon: FaMicroscope,
       title: 'Stérilisation',
       desc: 'Traçabilité des équipements médicaux stérilisés',
       color: '#4ECDC4',
@@ -14,7 +27,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'anatomical',
-      icon: '🔬',
+      Icon: FaLungs,
       title: 'Pièces Anatomiques',
       desc: 'Traçabilité complète des pièces anatomiques',
       color: '#66B8D6',
@@ -22,7 +35,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'incidents',
-      icon: '⚠️',
+      Icon: FaExclamationTriangle,
       title: 'Incidents / Accidents / AES',
       desc: 'Déclaration et suivi des actions correctives',
       color: '#E74C3C',
@@ -30,7 +43,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'maintenance',
-      icon: '🔧',
+      Icon: FaWrench,
       title: 'Maintenance & Biomédical',
       desc: 'Planification et suivi des interventions',
       color: '#F39C12',
@@ -38,7 +51,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'audits',
-      icon: '📋',
+      Icon: FaClipboardCheck,
       title: 'Audits & Inspections',
       desc: 'Programmation et checklists d\'audit',
       color: '#27AE60',
@@ -46,7 +59,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'formations',
-      icon: '🎓',
+      Icon: FaGraduationCap,
       title: 'Formations & Compétences',
       desc: 'Suivi des formations et habilitations',
       color: '#3498DB',
@@ -54,7 +67,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'dechets',
-      icon: '♻️',
+      Icon: FaRecycle,
       title: 'Déchets Médicaux',
       desc: 'Traçabilité et élimination',
       color: '#95A5A6',
@@ -62,7 +75,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'risques',
-      icon: '🛡️',
+      Icon: FaShieldAlt,
       title: 'Gestion des Risques',
       desc: 'Identification et évaluation des risques',
       color: '#8E44AD',
@@ -70,7 +83,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'ged',
-      icon: '📁',
+      Icon: FaFolderOpen,
       title: 'GED Documentaire',
       desc: 'Gestion documentaire QHSE',
       color: '#16A085',
@@ -78,7 +91,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'linge',
-      icon: '🧺',
+      Icon: FaShirtsinbulk,
       title: 'Traçabilité du Linge',
       desc: 'Suivi du linge avec génération automatique de codes',
       color: '#9B59B6',
@@ -86,7 +99,7 @@ export default function QHSEDashboard() {
     },
     {
       id: 'reporting',
-      icon: '📊',
+      Icon: FaChartBar,
       title: 'Reporting',
       desc: 'Export et rapports périodiques',
       color: '#34495E',
@@ -102,7 +115,7 @@ export default function QHSEDashboard() {
         <h1 className="display-4 custom-title">Tableau de Bord QHSE</h1>
         <p className="lead text-muted">Gestion complète de la Qualité, Hygiène, Sécurité et Environnement</p>
         <div className="alert alert-info d-inline-block">
-          <strong>📊 Total d'enregistrements : {totalRecords}</strong>
+          <strong><FaChartBar className="me-2" />Total d'enregistrements : {totalRecords}</strong>
         </div>
       </div>
 
@@ -148,8 +161,8 @@ export default function QHSEDashboard() {
             <div className="card h-100 module-card" style={{ borderTop: `4px solid ${module.color}` }}>
               <div className="card-body d-flex flex-column">
                 <div className="d-flex align-items-center mb-3">
-                  <div className="module-icon me-3" style={{ fontSize: '2.5rem' }}>
-                    {module.icon}
+                  <div className="module-icon me-3" style={{ fontSize: '2.5rem', color: module.color }}>
+                    <module.Icon />
                   </div>
                   <h5 className="card-title mb-0">{module.title}</h5>
                 </div>
