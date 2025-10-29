@@ -77,6 +77,14 @@ export default function QHSEDashboard() {
       path: '/ged'
     },
     {
+      id: 'linge',
+      icon: '🧺',
+      title: 'Traçabilité du Linge',
+      desc: 'Suivi du linge avec génération automatique de codes',
+      color: '#9B59B6',
+      path: '/linge'
+    },
+    {
       id: 'reporting',
       icon: '📊',
       title: 'Reporting',

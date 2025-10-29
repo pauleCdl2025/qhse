@@ -22,6 +22,8 @@ import FormationsList from './components/FormationsList';
 import DechetsList from './components/DechetsList';
 import RisquesList from './components/RisquesList';
 import GedList from './components/GedList';
+import LingeForm from './components/LingeForm';
+import LingeList from './components/LingeList';
 import './App.css';
 
 function App() {
@@ -61,6 +63,11 @@ function App() {
                     Pièces Anatomiques
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link custom-nav-link" to="/linge">
+                    Traçabilité Linge
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -90,6 +97,8 @@ function App() {
             <Route path="/risques/new" element={<RisquesForm />} />
             <Route path="/ged" element={<GedList />} />
             <Route path="/ged/new" element={<GedForm />} />
+            <Route path="/linge" element={<LingeList />} />
+            <Route path="/linge/new" element={<LingeForm />} />
             <Route path="/reporting" element={<Reporting />} />
           </Routes>
         </div>

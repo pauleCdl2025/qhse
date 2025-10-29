@@ -53,3 +53,19 @@ export interface AnatomicalPiece extends AnatomicalPieceFormData {
   id?: number;
 }
 
+export interface LingeTracking {
+  id?: number;
+  centre: string;
+  service: string;
+  item: string;
+  date_traitement: string;
+  seq_jour: number;
+  code_linge: string;
+  type_linge: string;
+  etat_recu: string;
+  etat_sorti: string;
+  responsable: string;
+  observations?: string;
+  created_at?: string;
+}
+
