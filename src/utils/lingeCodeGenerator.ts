@@ -1,7 +1,7 @@
 /**
  * Générateur et validateur de code linge
  * Format: XX-XX-XX-YYYYMMDD-NNN-CC
- * Exemple: CD-BL-DR-20251024-001-42
+ * Exemple: CDL-BL-DR-20251024-001-42
  */
 
 export function checksum2digits(s: string): string {
@@ -17,7 +17,7 @@ export function checksum2digits(s: string): string {
 }
 
 export function generateLingeCode(
-  center: string = 'CD',
+  center: string = 'CDL',
   service: string = 'BL',
   item: string = 'DR',
   date: Date = new Date(),

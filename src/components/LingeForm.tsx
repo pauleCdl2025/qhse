@@ -67,7 +67,7 @@ export default function LingeForm() {
               onChange={(e) => setFormData(prev => ({...prev, centre: e.target.value}))} 
               required
             >
-              <option value="CD">Centre Diagnostic (CD)</option>
+              <option value="CDL">Centre Diagnostic de Libreville (CDL)</option>
               <option value="CH">Centre Hospitalier (CH)</option>
               <option value="CL">Clinique (CL)</option>
               <option value="HP">Hôpital (HP)</option>
