@@ -16,12 +16,16 @@ export default function MaintenanceForm() {
     statut: 'Planifié'
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
-    qhseStorage.saveMaintenance(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/maintenance');
+    try {
+      const { supabaseService } = await import('../services/supabaseService');
+      await supabaseService.saveMaintenance(formData);
+      alert('✅ Enregistrement effectué avec succès!');
+      navigate('/maintenance');
+    } catch (error) {
+      alert('❌ Erreur lors de l\'enregistrement');
+    }
   };
 
   return (

@@ -1,19 +1,15 @@
 import { SterilizationFormData, AnatomicalPiece } from '../types';
+import { supabaseService } from '../services/supabaseService';
 
-const STERILIZATION_KEY = 'sterilization_records';
-const ANATOMICAL_KEY = 'anatomical_records';
-
+// Wrapper pour compatibilité avec ancien code
 export const storageService = {
   // Sterilization records
-  saveSterilization: (data: SterilizationFormData): void => {
-    const records = storageService.getAllSterilization();
-    records.push({ ...data, id: Date.now(), timestamp: new Date().toISOString() });
-    localStorage.setItem(STERILIZATION_KEY, JSON.stringify(records));
+  saveSterilization: async (data: SterilizationFormData): Promise<void> => {
+    await supabaseService.saveSterilization(data);
   },
 
   getAllSterilization: (): any[] => {
-    const data = localStorage.getItem(STERILIZATION_KEY);
-    return data ? JSON.parse(data) : [];
+    return supabaseService.getAllSterilizationSync();
   },
 
   getSterilizationById: (id: number): any => {
@@ -22,26 +18,12 @@ export const storageService = {
   },
 
   // Anatomical pieces records
-  saveAnatomical: (data: AnatomicalPiece): void => {
-    const records = storageService.getAllAnatomical();
-    const timestamp = new Date().toISOString();
-    if (data.id) {
-      // Update existing
-      const index = records.findIndex(r => r.id === data.id);
-      if (index !== -1) {
-        records[index] = { ...data, updated_at: timestamp };
-      }
-    } else {
-      // Create new
-      const newRecord = { ...data, created_at: timestamp, updated_at: timestamp };
-      records.push(newRecord);
-    }
-    localStorage.setItem(ANATOMICAL_KEY, JSON.stringify(records));
+  saveAnatomical: async (data: AnatomicalPiece): Promise<void> => {
+    await supabaseService.saveAnatomical(data);
   },
 
   getAllAnatomical: (): AnatomicalPiece[] => {
-    const data = localStorage.getItem(ANATOMICAL_KEY);
-    return data ? JSON.parse(data) : [];
+    return supabaseService.getAllAnatomicalSync();
   },
 
   getAnatomicalByRef: (ref: string): AnatomicalPiece | undefined => {

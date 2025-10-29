@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnatomicalPiece } from '../types';
 import { storageService } from '../utils/storage';
+import { supabaseService } from '../services/supabaseService';
 
 export default function AnatomicalPiecesList() {
   const navigate = useNavigate();
@@ -19,8 +20,17 @@ export default function AnatomicalPiecesList() {
   });
 
   useEffect(() => {
+    const loadRecords = async () => {
+      try {
+        const all = await supabaseService.getAllAnatomical();
+        setRecords(all);
+      } catch (error) {
+        console.error('Error loading anatomical:', error);
+        setRecords(storageService.getAllAnatomical());
+      }
+    };
     loadRecords();
-  }, [filters]);
+  }, []);
 
   useEffect(() => {
     const filtered = storageService.filterAnatomical(filters);

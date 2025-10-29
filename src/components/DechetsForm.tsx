@@ -16,12 +16,16 @@ export default function DechetsForm() {
     observation: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
-    qhseStorage.saveDechet(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/dechets');
+    try {
+      const { supabaseService } = await import('../services/supabaseService');
+      await supabaseService.saveDechet(formData);
+      alert('✅ Enregistrement effectué avec succès!');
+      navigate('/dechets');
+    } catch (error) {
+      alert('❌ Erreur lors de l\'enregistrement');
+    }
   };
 
   return (

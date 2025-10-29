@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Maintenance } from '../types/qhse';
-import { qhseStorage } from '../utils/storageQHSE';
+import { supabaseService } from '../services/supabaseService';
 
 export default function MaintenanceList() {
   const [records, setRecords] = useState<Maintenance[]>([]);
 
   useEffect(() => {
-    setRecords(qhseStorage.getAllMaintenance());
+    const loadRecords = async () => {
+      try {
+        const allRecords = await supabaseService.getAllMaintenance();
+        setRecords(allRecords);
+      } catch (error) {
+        console.error('Error loading maintenance:', error);
+        setRecords(supabaseService.getAllMaintenanceSync());
+      }
+    };
+    loadRecords();
   }, []);
 
   const formatDateTime = (dt?: string) => {

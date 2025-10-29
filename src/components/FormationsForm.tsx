@@ -18,12 +18,16 @@ export default function FormationsForm() {
   });
   const [participant, setParticipant] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
-    qhseStorage.saveFormation(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/formations');
+    try {
+      const { supabaseService } = await import('../services/supabaseService');
+      await supabaseService.saveFormation(formData);
+      alert('✅ Enregistrement effectué avec succès!');
+      navigate('/formations');
+    } catch (error) {
+      alert('❌ Erreur lors de l\'enregistrement');
+    }
   };
 
   const addParticipant = () => {

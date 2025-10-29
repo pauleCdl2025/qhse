@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { qhseStorage } from '../utils/storageQHSE';
+import { useState, useEffect } from 'react';
+import { supabaseService } from '../services/supabaseService';
 import { 
   FaMicroscope, 
   FaLungs, 
@@ -15,7 +16,38 @@ import {
 } from 'react-icons/fa';
 
 export default function QHSEDashboard() {
-  const stats = qhseStorage.getStats();
+  const [stats, setStats] = useState({
+    incidents: 0,
+    maintenance: 0,
+    audits: 0,
+    formations: 0,
+    dechets: 0,
+    risques: 0,
+    documents: 0
+  });
+
+  useEffect(() => {
+    const loadStats = async () => {
+      try {
+        const statsData = await supabaseService.getStats();
+        setStats(statsData);
+      } catch (error) {
+        console.error('Error loading stats:', error);
+        // Fallback to sync
+        const fallbackStats = {
+          incidents: supabaseService.getAllIncidentsSync().length,
+          maintenance: supabaseService.getAllMaintenanceSync().length,
+          audits: supabaseService.getAllAuditsSync().length,
+          formations: supabaseService.getAllFormationsSync().length,
+          dechets: supabaseService.getAllDechetsSync().length,
+          risques: supabaseService.getAllRisquesSync().length,
+          documents: supabaseService.getAllDocumentsSync().length
+        };
+        setStats(fallbackStats);
+      }
+    };
+    loadStats();
+  }, []);
   const modules = [
     {
       id: 'sterilization',

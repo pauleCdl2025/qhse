@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { storageService } from '../utils/storage';
+import { supabaseService } from '../services/supabaseService';
 
 export default function SterilizationList() {
   const navigate = useNavigate();
@@ -10,9 +11,14 @@ export default function SterilizationList() {
     loadRecords();
   }, []);
 
-  const loadRecords = () => {
-    const all = storageService.getAllSterilization();
-    setRecords(all);
+  const loadRecords = async () => {
+    try {
+      const all = await supabaseService.getAllSterilization();
+      setRecords(all);
+    } catch (error) {
+      console.error('Error loading sterilization:', error);
+      setRecords(storageService.getAllSterilization());
+    }
   };
 
   const formatDateTime = (dt?: string) => {

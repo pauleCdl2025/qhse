@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Audit } from '../types/qhse';
-import { qhseStorage } from '../utils/storageQHSE';
+import { supabaseService } from '../services/supabaseService';
 
 export default function AuditsList() {
   const [records, setRecords] = useState<Audit[]>([]);
 
   useEffect(() => {
-    setRecords(qhseStorage.getAllAudits());
+    const loadRecords = async () => {
+      try {
+        const allRecords = await supabaseService.getAllAudits();
+        setRecords(allRecords);
+      } catch (error) {
+        console.error('Error loading audits:', error);
+        setRecords(supabaseService.getAllAuditsSync());
+      }
+    };
+    loadRecords();
   }, []);
 
   const formatDate = (dt?: string) => {

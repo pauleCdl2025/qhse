@@ -22,13 +22,18 @@ export default function IncidentsForm() {
     statut: 'En cours'
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
-    qhseStorage.saveIncident(formData);
-    setToastMessage('✅ Enregistrement effectué avec succès!');
-    setShowToast(true);
-    setTimeout(() => navigate('/incidents'), 1500);
+    try {
+      const { supabaseService } = await import('../services/supabaseService');
+      await supabaseService.saveIncident(formData);
+      setToastMessage('✅ Enregistrement effectué avec succès!');
+      setShowToast(true);
+      setTimeout(() => navigate('/incidents'), 1500);
+    } catch (error) {
+      setToastMessage('❌ Erreur lors de l\'enregistrement');
+      setShowToast(true);
+    }
   };
 
   const handleChange = (field: keyof Incident, value: string) => {

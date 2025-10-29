@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DocumentGED } from '../types/qhse';
-import { qhseStorage } from '../utils/storageQHSE';
+import { supabaseService } from '../services/supabaseService';
 
 export default function GedList() {
   const [records, setRecords] = useState<DocumentGED[]>([]);
 
   useEffect(() => {
-    setRecords(qhseStorage.getAllDocuments());
+    const loadRecords = async () => {
+      try {
+        const allRecords = await supabaseService.getAllDocuments();
+        setRecords(allRecords);
+      } catch (error) {
+        console.error('Error loading documents:', error);
+        setRecords(supabaseService.getAllDocumentsSync());
+      }
+    };
+    loadRecords();
   }, []);
 
   const formatDate = (dt?: string) => {

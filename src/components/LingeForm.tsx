@@ -37,21 +37,21 @@ export default function LingeForm() {
     }
   }, [formData.centre, formData.service, formData.item, formData.date_traitement, formData.seq_jour]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Sauvegarde dans localStorage
-    const records = JSON.parse(localStorage.getItem('linge_tracking') || '[]');
-    records.push({
-      ...formData,
-      code_linge: codeAuto,
-      id: Date.now(),
-      created_at: new Date().toISOString()
-    });
-    localStorage.setItem('linge_tracking', JSON.stringify(records));
-    
-    setToastMessage('✅ Code généré et enregistré avec succès!');
-    setShowToast(true);
-    setTimeout(() => navigate('/linge'), 1500);
+    try {
+      const { supabaseService } = await import('../services/supabaseService');
+      await supabaseService.saveLinge({
+        ...formData,
+        code_linge: codeAuto
+      });
+      setToastMessage('✅ Code généré et enregistré avec succès!');
+      setShowToast(true);
+      setTimeout(() => navigate('/linge'), 1500);
+    } catch (error) {
+      setToastMessage('❌ Erreur lors de l\'enregistrement');
+      setShowToast(true);
+    }
   };
 
   return (

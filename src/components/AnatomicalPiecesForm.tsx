@@ -36,11 +36,15 @@ export default function AnatomicalPiecesForm() {
     }
   }, [ref]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    storageService.saveAnatomical(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/anatomical');
+    try {
+      await storageService.saveAnatomical(formData);
+      alert('✅ Enregistrement effectué avec succès!');
+      navigate('/anatomical');
+    } catch (error) {
+      alert('❌ Erreur lors de l\'enregistrement');
+    }
   };
 
   const handleChange = (field: keyof AnatomicalPiece, value: string) => {

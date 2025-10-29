@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Risque } from '../types/qhse';
-import { qhseStorage } from '../utils/storageQHSE';
+import { supabaseService } from '../services/supabaseService';
 
 export default function RisquesList() {
   const [records, setRecords] = useState<Risque[]>([]);
 
   useEffect(() => {
-    setRecords(qhseStorage.getAllRisques());
+    const loadRecords = async () => {
+      try {
+        const allRecords = await supabaseService.getAllRisques();
+        setRecords(allRecords);
+      } catch (error) {
+        console.error('Error loading risques:', error);
+        setRecords(supabaseService.getAllRisquesSync());
+      }
+    };
+    loadRecords();
   }, []);
 
   const getCriticiteColor = (criticite: number) => {

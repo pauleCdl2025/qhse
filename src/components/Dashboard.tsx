@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { storageService } from '../utils/storage';
+import { supabaseService } from '../services/supabaseService';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -9,33 +10,68 @@ export default function Dashboard() {
   });
 
   useEffect(() => {
-    const sterilizationRecords = storageService.getAllSterilization();
-    const anatomicalRecords = storageService.getAllAnatomical();
+    const loadData = async () => {
+      try {
+        const sterilizationRecords = await supabaseService.getAllSterilization();
+        const anatomicalRecords = await supabaseService.getAllAnatomical();
 
-    const now = new Date();
-    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const now = new Date();
+        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-    const sterilizationStats = {
-      total: sterilizationRecords.length,
-      conform: sterilizationRecords.filter(r => r.cycleResult === 'Conforme').length,
-      nonConform: sterilizationRecords.filter(r => r.cycleResult === 'Non conforme').length,
-      thisWeek: sterilizationRecords.filter(r => {
-        if (!r.timestamp) return false;
-        return new Date(r.timestamp) >= weekAgo;
-      }).length
+        const sterilizationStats = {
+          total: sterilizationRecords.length,
+          conform: sterilizationRecords.filter(r => r.cycleResult === 'Conforme').length,
+          nonConform: sterilizationRecords.filter(r => r.cycleResult === 'Non conforme').length,
+          thisWeek: sterilizationRecords.filter(r => {
+            if (!r.timestamp) return false;
+            return new Date(r.timestamp) >= weekAgo;
+          }).length
+        };
+
+        const anatomicalStats = {
+          total: anatomicalRecords.length,
+          lab: anatomicalRecords.filter(r => r.destination === 'Laboratoire').length,
+          destruction: anatomicalRecords.filter(r => r.destination === 'Destruction').length,
+          thisWeek: anatomicalRecords.filter(r => {
+            if (!r.created_at) return false;
+            return new Date(r.created_at) >= weekAgo;
+          }).length
+        };
+
+        setStats({ sterilization: sterilizationStats, anatomical: anatomicalStats });
+      } catch (error) {
+        console.error('Error loading data:', error);
+        // Fallback
+        const sterilizationRecords = storageService.getAllSterilization();
+        const anatomicalRecords = storageService.getAllAnatomical();
+        
+        const now = new Date();
+        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+        const sterilizationStats = {
+          total: sterilizationRecords.length,
+          conform: sterilizationRecords.filter(r => r.cycleResult === 'Conforme').length,
+          nonConform: sterilizationRecords.filter(r => r.cycleResult === 'Non conforme').length,
+          thisWeek: sterilizationRecords.filter(r => {
+            if (!r.timestamp) return false;
+            return new Date(r.timestamp) >= weekAgo;
+          }).length
+        };
+
+        const anatomicalStats = {
+          total: anatomicalRecords.length,
+          lab: anatomicalRecords.filter(r => r.destination === 'Laboratoire').length,
+          destruction: anatomicalRecords.filter(r => r.destination === 'Destruction').length,
+          thisWeek: anatomicalRecords.filter(r => {
+            if (!r.created_at) return false;
+            return new Date(r.created_at) >= weekAgo;
+          }).length
+        };
+
+        setStats({ sterilization: sterilizationStats, anatomical: anatomicalStats });
+      }
     };
-
-    const anatomicalStats = {
-      total: anatomicalRecords.length,
-      lab: anatomicalRecords.filter(r => r.destination === 'Laboratoire').length,
-      destruction: anatomicalRecords.filter(r => r.destination === 'Destruction').length,
-      thisWeek: anatomicalRecords.filter(r => {
-        if (!r.created_at) return false;
-        return new Date(r.created_at) >= weekAgo;
-      }).length
-    };
-
-    setStats({ sterilization: sterilizationStats, anatomical: anatomicalStats });
+    loadData();
   }, []);
 
   return (

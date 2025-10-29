@@ -17,12 +17,16 @@ export default function AuditsForm() {
     plan_action: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
-    qhseStorage.saveAudit(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/audits');
+    try {
+      const { supabaseService } = await import('../services/supabaseService');
+      await supabaseService.saveAudit(formData);
+      alert('✅ Enregistrement effectué avec succès!');
+      navigate('/audits');
+    } catch (error) {
+      alert('❌ Erreur lors de l\'enregistrement');
+    }
   };
 
   return (

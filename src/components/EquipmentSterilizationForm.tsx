@@ -29,11 +29,15 @@ export default function EquipmentSterilizationForm() {
     generalObservations: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    storageService.saveSterilization(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/sterilization');
+    try {
+      await storageService.saveSterilization(formData);
+      alert('✅ Enregistrement effectué avec succès!');
+      navigate('/sterilization');
+    } catch (error) {
+      alert('❌ Erreur lors de l\'enregistrement');
+    }
   };
 
   const handleChange = (field: keyof SterilizationFormData, value: string | number) => {

@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Formation } from '../types/qhse';
-import { qhseStorage } from '../utils/storageQHSE';
+import { supabaseService } from '../services/supabaseService';
 
 export default function FormationsList() {
   const [records, setRecords] = useState<Formation[]>([]);
 
   useEffect(() => {
-    setRecords(qhseStorage.getAllFormations());
+    const loadRecords = async () => {
+      try {
+        const allRecords = await supabaseService.getAllFormations();
+        setRecords(allRecords);
+      } catch (error) {
+        console.error('Error loading formations:', error);
+        setRecords(supabaseService.getAllFormationsSync());
+      }
+    };
+    loadRecords();
   }, []);
 
   const formatDateTime = (dt?: string) => {

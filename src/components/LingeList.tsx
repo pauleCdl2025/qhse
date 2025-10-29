@@ -2,14 +2,23 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LingeTracking } from '../types';
 import { validateLingeCode } from '../utils/lingeCodeGenerator';
+import { supabaseService } from '../services/supabaseService';
 
 export default function LingeList() {
   const [records, setRecords] = useState<LingeTracking[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const data = localStorage.getItem('linge_tracking');
-    setRecords(data ? JSON.parse(data) : []);
+    const loadRecords = async () => {
+      try {
+        const allRecords = await supabaseService.getAllLinge();
+        setRecords(allRecords);
+      } catch (error) {
+        console.error('Error loading linge:', error);
+        setRecords(supabaseService.getAllLingeSync());
+      }
+    };
+    loadRecords();
   }, []);
 
   const filteredRecords = records.filter(r => {

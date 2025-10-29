@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { DechetMedical } from '../types/qhse';
-import { qhseStorage } from '../utils/storageQHSE';
+import { supabaseService } from '../services/supabaseService';
 
 export default function DechetsList() {
   const [records, setRecords] = useState<DechetMedical[]>([]);
 
   useEffect(() => {
-    setRecords(qhseStorage.getAllDechets());
+    const loadRecords = async () => {
+      try {
+        const allRecords = await supabaseService.getAllDechets();
+        setRecords(allRecords);
+      } catch (error) {
+        console.error('Error loading dechets:', error);
+        setRecords(supabaseService.getAllDechetsSync());
+      }
+    };
+    loadRecords();
   }, []);
 
   const formatDateTime = (dt?: string) => {

@@ -32,12 +32,16 @@ export default function RisquesForm() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
-    qhseStorage.saveRisque(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/risques');
+    try {
+      const { supabaseService } = await import('../services/supabaseService');
+      await supabaseService.saveRisque(formData);
+      alert('✅ Enregistrement effectué avec succès!');
+      navigate('/risques');
+    } catch (error) {
+      alert('❌ Erreur lors de l\'enregistrement');
+    }
   };
 
   return (

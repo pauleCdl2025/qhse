@@ -17,12 +17,16 @@ export default function GedForm() {
     mots_cles: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const qhseStorage = require('../utils/storageQHSE').qhseStorage;
-    qhseStorage.saveDocument(formData);
-    alert('Enregistrement effectué avec succès!');
-    navigate('/ged');
+    try {
+      const { supabaseService } = await import('../services/supabaseService');
+      await supabaseService.saveDocument(formData);
+      alert('✅ Enregistrement effectué avec succès!');
+      navigate('/ged');
+    } catch (error) {
+      alert('❌ Erreur lors de l\'enregistrement');
+    }
   };
 
   return (
