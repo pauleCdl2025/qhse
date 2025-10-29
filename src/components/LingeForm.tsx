@@ -82,7 +82,7 @@ export default function LingeForm() {
               required
             >
               <option value="">Sélectionner...</option>
-              <option value="AC">Accueil (AC)</option>
+              <option value="AC">Accueil/Facturation (AC)</option>
               <option value="BL">Bloc Opératoire (BL)</option>
               <option value="LA">Blanchisserie (LA)</option>
               <option value="UR">Urgences (UR)</option>
@@ -91,7 +91,6 @@ export default function LingeForm() {
               <option value="ST">Stérilisation (ST)</option>
               <option value="RE">Réanimation (RE)</option>
               <option value="RD">Radiologie (RD)</option>
-              <option value="FA">Facturation (FA)</option>
             </select>
           </div>
           <div className="col-md-2">
